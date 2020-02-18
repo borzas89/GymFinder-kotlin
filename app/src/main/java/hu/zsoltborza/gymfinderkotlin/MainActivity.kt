@@ -6,7 +6,7 @@ import com.zhuinden.simplestack.History
 import com.zhuinden.simplestack.StateChange
 import com.zhuinden.simplestack.StateChanger
 import com.zhuinden.simplestack.navigator.Navigator
-import hu.zsoltborza.gymfinderkotlin.application.navigation.FragmentStateChanger
+import hu.zsoltborza.gymfinderkotlin.core.navigation.FragmentStateChanger
 import hu.zsoltborza.gymfinderkotlin.features.dashboard.DashboardKey
 import hu.zsoltborza.gymfinderkotlin.features.list.ListKey
 import hu.zsoltborza.gymfinderkotlin.features.map.MapKey

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hu.zsoltborza.gymfinderkotlin.R
-import hu.zsoltborza.gymfinderkotlin.application.navigation.BaseFragment
+import hu.zsoltborza.gymfinderkotlin.core.navigation.BaseFragment
 
 class DashboardFragment: BaseFragment() {
     override fun onCreateView(

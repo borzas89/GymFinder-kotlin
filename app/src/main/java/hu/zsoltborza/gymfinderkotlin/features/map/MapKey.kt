@@ -1,7 +1,7 @@
 package hu.zsoltborza.gymfinderkotlin.features.map
 
-import hu.zsoltborza.gymfinderkotlin.application.navigation.BaseFragment
-import hu.zsoltborza.gymfinderkotlin.application.navigation.BaseKey
+import hu.zsoltborza.gymfinderkotlin.core.navigation.BaseFragment
+import hu.zsoltborza.gymfinderkotlin.core.navigation.BaseKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
