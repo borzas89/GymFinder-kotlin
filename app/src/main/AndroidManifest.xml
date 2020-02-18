@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hu.zsoltborza.gymfinderkotlin">
-
-    <!-- Google maps api key: AIzaSyBFPYaA8jaPqVjhMp3ebb_UZc1YFmP1HaQ -->
+    
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
