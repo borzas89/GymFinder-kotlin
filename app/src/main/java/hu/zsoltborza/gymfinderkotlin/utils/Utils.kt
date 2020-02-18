@@ -6,6 +6,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import androidx.fragment.app.Fragment
+import com.zhuinden.simplestack.Backstack
+import com.zhuinden.simplestack.StateChange
+import com.zhuinden.simplestack.navigator.Navigator
 
 fun View.onClick(clickListener: (View) -> Unit) {
     setOnClickListener(clickListener)
@@ -60,3 +64,14 @@ fun <T : View> T.hideIf(condition: (T) -> Boolean): T {
 
     return this
 }
+
+val Fragment.requireArguments
+    get() = this.arguments ?: throw IllegalStateException("Arguments should exist!")
+
+fun Backstack.replaceHistory(vararg keys: Any) {
+    this.setHistory(keys.toList(), StateChange.REPLACE)
+}
+
+val Activity.backstack: Backstack get() = Navigator.getBackstack(this)
+
+val Fragment.backstack: Backstack get() = com.zhuinden.simplestack.navigator.Navigator.getBackstack(requireActivity())
