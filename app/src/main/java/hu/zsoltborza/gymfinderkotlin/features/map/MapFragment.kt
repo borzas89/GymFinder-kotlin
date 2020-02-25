@@ -26,5 +26,7 @@ class MapFragment: BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mapText.setText(viewModel.mapName)
+
+        viewModel.insertDataFromFile()
     }
 }

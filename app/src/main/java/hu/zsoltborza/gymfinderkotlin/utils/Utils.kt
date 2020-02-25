@@ -1,15 +1,21 @@
 package hu.zsoltborza.gymfinderkotlin.utils
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
 import com.zhuinden.simplestack.Backstack
 import com.zhuinden.simplestack.StateChange
 import com.zhuinden.simplestack.navigator.Navigator
+import hu.zsoltborza.gymfinderkotlin.R
+import hu.zsoltborza.gymfinderkotlin.data.local.model.GymData
+import hu.zsoltborza.gymfinderkotlin.data.local.model.GymListItem
+import java.util.*
 
 fun View.onClick(clickListener: (View) -> Unit) {
     setOnClickListener(clickListener)
@@ -75,3 +81,30 @@ fun Backstack.replaceHistory(vararg keys: Any) {
 val Activity.backstack: Backstack get() = Navigator.getBackstack(this)
 
 val Fragment.backstack: Backstack get() = com.zhuinden.simplestack.navigator.Navigator.getBackstack(requireActivity())
+
+
+/**
+ * Reading gyms from file, returning as a list.
+ * @param context
+ * @return List of questions
+ */
+fun getDataFromFile(context: Context): List<GymListItem> {
+
+    val res = context.resources
+
+    val builder = StringBuilder()
+    val `is` = res.openRawResource(R.raw.marker)
+    val scanner = Scanner(`is`)
+
+    while (scanner.hasNextLine()) {
+        builder.append(scanner.nextLine())
+    }
+
+    val file = builder.toString()
+
+    val gson = Gson()
+
+    val gymList = gson.fromJson(file, GymData::class.java)
+
+    return gymList.gymList!!
+}

@@ -3,17 +3,22 @@ package hu.zsoltborza.gymfinderkotlin
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.zhuinden.simplestack.GlobalServices
 import com.zhuinden.simplestack.History
 import com.zhuinden.simplestack.StateChange
 import com.zhuinden.simplestack.StateChanger
 import com.zhuinden.simplestack.navigator.Navigator
+import hu.zsoltborza.gymfinderkotlin.application.CustomApplication
 import hu.zsoltborza.gymfinderkotlin.core.navigation.FragmentStateChanger
 import hu.zsoltborza.gymfinderkotlin.core.viewmodels.ServiceProvider
+import hu.zsoltborza.gymfinderkotlin.data.local.database.DatabaseManager
 import hu.zsoltborza.gymfinderkotlin.features.dashboard.DashboardKey
 import hu.zsoltborza.gymfinderkotlin.features.list.ListKey
 import hu.zsoltborza.gymfinderkotlin.features.map.MapKey
 import hu.zsoltborza.gymfinderkotlin.utils.backstack
+import hu.zsoltborza.gymfinderkotlin.utils.getDataFromFile
 import hu.zsoltborza.gymfinderkotlin.utils.replaceHistory
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -43,7 +48,8 @@ class MainActivity : AppCompatActivity(),StateChanger {
         }
 
         fragmentStateChanger = FragmentStateChanger(supportFragmentManager, R.id.root)
-        appContext = applicationContext
+        appContext = applicationContext  as CustomApplication
+
 
         Navigator.configure()
             .setStateChanger(this)
