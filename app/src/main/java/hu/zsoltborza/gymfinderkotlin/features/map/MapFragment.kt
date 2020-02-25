@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import hu.zsoltborza.gymfinderkotlin.R
 import hu.zsoltborza.gymfinderkotlin.core.navigation.BaseFragment
+import hu.zsoltborza.gymfinderkotlin.core.navigation.backstack
+import hu.zsoltborza.gymfinderkotlin.core.viewmodels.lookup
+import kotlinx.android.synthetic.main.fragment_map.*
 
 class MapFragment: BaseFragment() {
+    private val viewModel by lazy { backstack.lookup<MapViewModel>() }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -19,6 +24,7 @@ class MapFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // ...
+
+        mapText.setText(viewModel.mapName)
     }
 }
