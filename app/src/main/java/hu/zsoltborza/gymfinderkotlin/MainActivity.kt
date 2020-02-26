@@ -5,10 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.zhuinden.simplestack.GlobalServices
-import com.zhuinden.simplestack.History
-import com.zhuinden.simplestack.StateChange
-import com.zhuinden.simplestack.StateChanger
+import com.zhuinden.simplestack.*
 import com.zhuinden.simplestack.navigator.Navigator
 import hu.zsoltborza.gymfinderkotlin.application.CustomApplication
 import hu.zsoltborza.gymfinderkotlin.core.navigation.FragmentStateChanger
@@ -23,15 +20,12 @@ import hu.zsoltborza.gymfinderkotlin.utils.replaceHistory
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(),StateChanger {
+class MainActivity : AppCompatActivity(), SimpleStateChanger.NavigationHandler {
     private lateinit var fragmentStateChanger: FragmentStateChanger
-    private lateinit var appContext: Context
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         navigation.setOnNavigationItemSelectedListener { item ->
             val destination = when (item.itemId) {
@@ -48,18 +42,10 @@ class MainActivity : AppCompatActivity(),StateChanger {
         }
 
         fragmentStateChanger = FragmentStateChanger(supportFragmentManager, R.id.root)
-        appContext = applicationContext  as CustomApplication
-
 
         Navigator.configure()
-            .setStateChanger(this)
-            .setScopedServices(ServiceProvider())
-            .setGlobalServices(
-                GlobalServices.builder()
-                    .addService("appContext", appContext)
-                    .build()
-            )
-
+            .setStateChanger(SimpleStateChanger(this))
+            .setScopedServices(ServiceProvider(application as CustomApplication))
             .install(this, root, History.single(DashboardKey()))
     }
 
@@ -69,15 +55,7 @@ class MainActivity : AppCompatActivity(),StateChanger {
         }
     }
 
-    override fun handleStateChange(
-        stateChange: StateChange,
-        completionCallback: StateChanger.Callback
-    ) {
-        if (stateChange.isTopNewKeyEqualToPrevious) {
-            completionCallback.stateChangeComplete()
-            return
-        }
+    override fun onNavigationEvent(stateChange: StateChange) {
         fragmentStateChanger.handleStateChange(stateChange)
-        completionCallback.stateChangeComplete()
     }
 }

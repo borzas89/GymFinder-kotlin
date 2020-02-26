@@ -25,8 +25,9 @@ class MapFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mapText.setText(viewModel.mapName)
+        mapText.setText(viewModel.mapName + " " + viewModel.dataSize())
 
-        viewModel.insertDataFromFile()
+        //viewModel.insertDataFromFile()
+        viewModel.checkDatabase()
     }
 }
