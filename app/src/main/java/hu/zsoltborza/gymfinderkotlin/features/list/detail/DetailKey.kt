@@ -1,4 +1,4 @@
-package hu.zsoltborza.gymfinderkotlin.features.map
+package hu.zsoltborza.gymfinderkotlin.features.list.detail
 
 import com.zhuinden.simplestack.ServiceBinder
 import hu.zsoltborza.gymfinderkotlin.application.CustomApplication
@@ -9,11 +9,14 @@ import hu.zsoltborza.gymfinderkotlin.core.viewmodels.add
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class MapKey(private val placeholder: String = "") : BaseKey(), HasServices {
+data class DetailKey(val itemId: Long) : BaseKey(), HasServices {
     override fun bindServices(serviceBinder: ServiceBinder, application: CustomApplication) {
         with(serviceBinder) {
-            add(MapViewModel(application, backstack, application.mapDao))
+            add(DetailViewModel(application.mapDao, application.mainScheduler, backstack, getKey()))
         }
-    }// generate reliable `toString()` for no-args data class
-    override fun createFragment(): BaseFragment = MapFragment()
+    }
+
+    // generate reliable `toString()` for no-args data class
+    override fun createFragment(): BaseFragment = DetailFragment()
+
 }

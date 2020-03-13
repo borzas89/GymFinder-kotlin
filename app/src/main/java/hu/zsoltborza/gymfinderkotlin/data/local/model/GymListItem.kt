@@ -2,6 +2,7 @@ package hu.zsoltborza.gymfinderkotlin.data.local.model
 
 /**
  * Created by Zsolt Borza on 2018.01.30..
+ * Gym datas from file...
  */
 
 import android.os.Parcel
@@ -10,7 +11,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class GymListItem : Parcelable {
+class GymListItem protected constructor(`in`: Parcel) : Parcelable {
 
     @SerializedName("markerId")
     @Expose
@@ -38,7 +39,7 @@ class GymListItem : Parcelable {
     @Expose
     var info: String? = null
 
-    protected constructor(`in`: Parcel) {
+    init {
         id = `in`.readString()
         title = `in`.readString()
         address1 = `in`.readString()

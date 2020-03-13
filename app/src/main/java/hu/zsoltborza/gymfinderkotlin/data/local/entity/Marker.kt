@@ -8,12 +8,13 @@ import androidx.room.PrimaryKey
 data class Marker (
     @NonNull
     @PrimaryKey
-    var markerId: Long,
+    override val markerId: Long,
     var title: String,
     var information: String,
     var address: String,
-    var latitude: Double,
-    var longitude: Double,
+    override val latitude: Double,
+    override val longitude: Double,
     var isFavourite: Boolean
-){
+): BaseMarkerModel(){
+
 }

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 /**
  * Created by Zsolt Borza on 2018.01.30..
+ * Gym datas from file...
  */
 
 class GymData {
